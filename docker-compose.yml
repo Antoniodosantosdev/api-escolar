@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  api:
+    # Constrói a imagem a partir do Dockerfile no diretório atual (.)
+    build: .
+    # Comando para executar a aplicação com reload automático
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    # Mapeia a porta 8000 do container para a porta 8000 da sua máquina
+    ports:
+      - "8000:8000"
+    # Mapeia o diretório atual para o diretório /app dentro do container
+    # Isso permite o live-reloading e a persistência do banco de dados SQLite
+    volumes:
+      - .:/app
